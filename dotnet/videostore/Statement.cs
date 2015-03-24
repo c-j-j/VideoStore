@@ -49,6 +49,7 @@ namespace videostore
                 bodyText += FormatRentalLine(rental, rentalAmount);
                 totalAmount += rentalAmount;
             }
+
             bodyText += StatementFooter(totalAmount, frequentRenterPoints);
             return bodyText;
         }
