@@ -5,44 +5,79 @@
     [TestFixture]
     public class VideoStoreTest
     {
+        Customer customer;
+        Movie newReleaseMovieA;
+        Movie newReleaseMovieB;
+        Movie childrensMovie;
+        Movie regularMovieA;
+        Movie regularMovieB;
+        Movie regularMovieC;
+
         [SetUp]
         public void Setup()
         {
-            customer = new Customer("Fred");
+            customer = new Customer("SomeCustomerName");
+            newReleaseMovieA = new Movie("SomeNewReleaseA", Movie.NEW_RELEASE);
+            newReleaseMovieB = new Movie("SomeNewReleaseB", Movie.NEW_RELEASE);
+            childrensMovie = new Movie("The Tigger Movie", Movie.CHILDRENS);
+            regularMovieA = new Movie("SomeRegularMovieA", Movie.REGULAR);
+            regularMovieB = new Movie("SomeRegularMovieB", Movie.REGULAR);
+            regularMovieC = new Movie("SomeRegularMovieC", Movie.REGULAR);
         }
 
         [Test]
         public void TestSingleNewReleaseStatement()
         {
-            customer.AddRental(new Rental(new Movie("The Cell", Movie.NEW_RELEASE), 3));
-            Assert.AreEqual("Rental Record for Fred\n\tThe Cell\t9.0\nYou owed 9.0\nYou earned 2 frequent renter points\n", customer.Statement());
+            customer.AddRental(new Rental(newReleaseMovieA, 3));
+            customer.GenerateStatement();
+            Assert.AreEqual(9, customer.GetTotalAmount());
+            Assert.AreEqual(2, customer.GetFrequentRenterPoints());
         }
 
         [Test]
         public void TestDualNewReleaseStatement()
         {
-            customer.AddRental(new Rental(new Movie("The Cell", Movie.NEW_RELEASE), 3));
-            customer.AddRental(new Rental(new Movie("The Tigger Movie", Movie.NEW_RELEASE), 3));
-            Assert.AreEqual("Rental Record for Fred\n\tThe Cell\t9.0\n\tThe Tigger Movie\t9.0\nYou owed 18.0\nYou earned 4 frequent renter points\n", customer.Statement());
+            customer.AddRental(new Rental(newReleaseMovieA, 3));
+            customer.AddRental(new Rental(newReleaseMovieB, 3));
+            customer.GenerateStatement();
+            Assert.AreEqual(18, customer.GetTotalAmount());
+            Assert.AreEqual(4, customer.GetFrequentRenterPoints());
         }
 
         [Test]
         public void TestSingleChildrensStatement()
         {
-            customer.AddRental(new Rental(new Movie("The Tigger Movie", Movie.CHILDRENS), 3));
-            Assert.AreEqual("Rental Record for Fred\n\tThe Tigger Movie\t1.5\nYou owed 1.5\nYou earned 1 frequent renter points\n", customer.Statement());
+            customer.AddRental(new Rental(childrensMovie, 3));
+            customer.GenerateStatement();
+            Assert.AreEqual(1.5, customer.GetTotalAmount());
+            Assert.AreEqual(1, customer.GetFrequentRenterPoints());
         }
 
         [Test]
         public void TestMultipleRegularStatement()
         {
-            customer.AddRental(new Rental(new Movie("Plan 9 from Outer Space", Movie.REGULAR), 1));
-            customer.AddRental(new Rental(new Movie("8 1/2", Movie.REGULAR), 2));
-            customer.AddRental(new Rental(new Movie("Eraserhead", Movie.REGULAR), 3));
-
-            Assert.AreEqual("Rental Record for Fred\n\tPlan 9 from Outer Space\t2.0\n\t8 1/2\t2.0\n\tEraserhead\t3.5\nYou owed 7.5\nYou earned 3 frequent renter points\n", customer.Statement());
+            customer.AddRental(new Rental(regularMovieA, 1));
+            customer.AddRental(new Rental(regularMovieB, 2));
+            customer.AddRental(new Rental(regularMovieC, 3));
+            customer.GenerateStatement();
+            Assert.AreEqual(7.5, customer.GetTotalAmount());
+            Assert.AreEqual(3, customer.GetFrequentRenterPoints());
         }
 
-        private Customer customer;
+        [Test]
+        public void TestFormattingOfStatement()
+        {
+            customer.AddRental(new Rental(regularMovieA, 1));
+            customer.AddRental(new Rental(regularMovieB, 2));
+            customer.AddRental(new Rental(regularMovieC, 3));
+            customer.GenerateStatement();
+
+            Assert.AreEqual("Rental Record for SomeCustomerName\n\t" +
+                    "SomeRegularMovieA\t2.0\n\t" +
+                    "SomeRegularMovieB\t2.0\n\t" +
+                    "SomeRegularMovieC\t3.5\n" +
+                    "You owed 7.5\n" +
+                    "You earned 3 frequent renter points\n", customer.GenerateStatement());
+        }
     }
 }

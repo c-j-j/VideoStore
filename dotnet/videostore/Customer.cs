@@ -5,6 +5,12 @@ namespace videostore
 {
     class Customer
     {
+        private String name;
+        private double totalAmount;
+        private int frequentRenterPoints;
+
+        private ArrayList rentals = new ArrayList();
+
         public Customer(String name)
         {
             this.name = name;
@@ -20,10 +26,10 @@ namespace videostore
             return name;
         }
 
-        public String Statement()
+        public String GenerateStatement()
         {
-            double totalAmount = 0;
-            int frequentRenterPoints = 0;
+            totalAmount = 0;
+            frequentRenterPoints = 0;
 
             IEnumerator rentalsEnumerator = this.rentals.GetEnumerator();
             String result = "Rental Record for " + GetName() + "\n";
@@ -69,8 +75,15 @@ namespace videostore
             return result;
         }
 
+        public double GetTotalAmount()
+        {
+            return totalAmount;
+        }
 
-        private String name;
-        private ArrayList rentals = new ArrayList();
+        public int GetFrequentRenterPoints()
+        {
+            return frequentRenterPoints;
+        }
+
     }
 }

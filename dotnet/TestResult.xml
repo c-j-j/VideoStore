@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="/Users/chrisjordan/csharp_projects/videostore/dotnet/videostore/bin/Debug/videostore.dll" total="5" failures="0" not-run="0" date="2015-03-24" time="14:17:08">
+  <environment nunit-version="2.4.8.0" clr-version="4.0.30319.17020" os-version="Unix 14.0.0.0" platform="Unix" cwd="/Users/chrisjordan/csharp_projects/videostore/dotnet" machine-name="Chriss-MacBook-Pro-2.local" user="chrisjordan" user-domain="Chriss-MacBook-Pro-2.local" />
+  <culture-info current-culture="en-GB" current-uiculture="en-GB" />
+  <test-suite name="/Users/chrisjordan/csharp_projects/videostore/dotnet/videostore/bin/Debug/videostore.dll" success="True" time="0.032" asserts="0">
+    <results>
+      <test-suite name="videostore" success="True" time="0.028" asserts="0">
+        <results>
+          <test-suite name="VideoStoreTest" success="True" time="0.021" asserts="0">
+            <results>
+              <test-case name="videostore.VideoStoreTest.TestDualNewReleaseStatement" executed="True" success="True" time="0.010" asserts="2" />
+              <test-case name="videostore.VideoStoreTest.TestFormattingOfStatement" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="videostore.VideoStoreTest.TestMultipleRegularStatement" executed="True" success="True" time="0.000" asserts="2" />
+              <test-case name="videostore.VideoStoreTest.TestSingleChildrensStatement" executed="True" success="True" time="0.000" asserts="2" />
+              <test-case name="videostore.VideoStoreTest.TestSingleNewReleaseStatement" executed="True" success="True" time="0.000" asserts="2" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
