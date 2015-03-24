@@ -17,11 +17,6 @@
         public abstract double DetermineAmount(int daysRented);
         public abstract int DetermineFrequentRenterPoints(int daysRented);
 
-        public int GetPriceCode()
-        {
-            return _priceCode;
-        }
-
         public string GetTitle()
         {
             return title;
