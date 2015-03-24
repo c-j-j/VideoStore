@@ -17,12 +17,12 @@
         public void Setup()
         {
             customer = new Statement("SomeCustomerName");
-            newReleaseMovieA = new Movie("SomeNewReleaseA", Movie.NEW_RELEASE);
-            newReleaseMovieB = new Movie("SomeNewReleaseB", Movie.NEW_RELEASE);
-            childrensMovie = new Movie("The Tigger Movie", Movie.CHILDRENS);
-            regularMovieA = new Movie("SomeRegularMovieA", Movie.REGULAR);
-            regularMovieB = new Movie("SomeRegularMovieB", Movie.REGULAR);
-            regularMovieC = new Movie("SomeRegularMovieC", Movie.REGULAR);
+            newReleaseMovieA = new NewReleaseMovie("SomeNewReleaseA", Movie.NEW_RELEASE);
+            newReleaseMovieB = new NewReleaseMovie("SomeNewReleaseB", Movie.NEW_RELEASE);
+            childrensMovie = new ChildrensMovie("The Tigger Movie", Movie.CHILDRENS);
+            regularMovieA = new RegularMovie("SomeRegularMovieA", Movie.REGULAR);
+            regularMovieB = new RegularMovie("SomeRegularMovieB", Movie.REGULAR);
+            regularMovieC = new RegularMovie("SomeRegularMovieC", Movie.REGULAR);
         }
 
         [Test]
