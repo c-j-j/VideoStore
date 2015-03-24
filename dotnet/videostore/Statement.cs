@@ -34,6 +34,12 @@ namespace videostore
             return statementText;
         }
 
+        void ResetTotals()
+        {
+            totalAmount = 0;
+            frequentRenterPoints = 0;
+        }
+
         string StatementHeader()
         {
             return string.Format("Rental Record for {0}\n", customerName);
@@ -54,12 +60,6 @@ namespace videostore
             return bodyText;
         }
 
-        void ResetTotals()
-        {
-            totalAmount = 0;
-            frequentRenterPoints = 0;
-        }
-
         static string FormatFrequentRenterPoints(int frequentRenterPoints)
         {
             return string.Format("You earned {0} frequent renter points\n", frequentRenterPoints);
@@ -77,7 +77,7 @@ namespace videostore
 
         static string FormatRentalLine(Rental rental, double rentalAmount)
         {
-            return string.Format("\t{0}\t{1:F1}\n", rental.GetMovie().GetTitle(), rentalAmount);
+            return string.Format("\t{0}\t{1:F1}\n", rental.GetMovieTitle(), rentalAmount);
         }
 
         public double GetTotalAmount()

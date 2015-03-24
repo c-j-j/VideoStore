@@ -11,11 +11,6 @@
             this.daysRented = daysRented;
         }
 
-        public int GetDaysRented()
-        {
-            return daysRented;
-        }
-
         public double DetermineRentalAmount()
         {
             return movie.DetermineAmount(daysRented);
@@ -26,9 +21,9 @@
             return movie.DetermineFrequentRenterPoints(daysRented);
         }
 
-        public Movie GetMovie()
+        public string GetMovieTitle()
         {
-            return movie;
+            return movie.GetTitle();
         }
     }
 }
