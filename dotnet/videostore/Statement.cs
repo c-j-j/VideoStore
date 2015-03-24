@@ -44,7 +44,7 @@ namespace videostore
             var bodyText = "";
             foreach (var rental in rentals)
             {
-                var rentalAmount = DetermineRentalAmount(rental);
+                var rentalAmount = rental.DetermineRentalAmount();
                 frequentRenterPoints += DetermineFrequentRenterPoints(rental);
                 bodyText += FormatRentalLine(rental, rentalAmount);
                 totalAmount += rentalAmount;
@@ -69,27 +69,6 @@ namespace videostore
             frequentRenterPoints = 0;
         }
 
-        static double DetermineRentalAmount(Rental rental)
-        {
-            double thisAmount = 0;
-            switch (rental.GetMovie().GetPriceCode())
-            {
-                case Movie.REGULAR:
-                    thisAmount += 2;
-                    if (rental.GetDaysRented() > 2)
-                        thisAmount += (rental.GetDaysRented() - 2) * 1.5;
-                    break;
-                case Movie.NEW_RELEASE:
-                    thisAmount += rental.GetDaysRented() * 3;
-                    break;
-                case Movie.CHILDRENS:
-                    thisAmount += 1.5;
-                    if (rental.GetDaysRented() > 3)
-                        thisAmount += (rental.GetDaysRented() - 3) * 1.5;
-                    break;
-            }
-            return thisAmount;
-        }
 
         static string FormatFrequentRenterPoints(int frequentRenterPoints)
         {
