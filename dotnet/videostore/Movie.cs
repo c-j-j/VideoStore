@@ -2,16 +2,11 @@
 {
     public abstract class Movie
     {
-        public const int CHILDRENS = 2;
-        public const int REGULAR = 0;
-        public const int NEW_RELEASE = 1;
         private readonly string title;
-        protected int _priceCode;
 
-        protected Movie(string title, int priceCode)
+        protected Movie(string title)
         {
             this.title = title;
-            this._priceCode = priceCode;
         }
 
         public abstract double DetermineAmount(int daysRented);

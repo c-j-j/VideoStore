@@ -2,8 +2,9 @@ namespace videostore
 {
     public class ChildrensMovie : Movie
     {
-        public ChildrensMovie(string title, int priceCode)
-            : base(title, priceCode)
+
+        public ChildrensMovie(string title)
+            : base(title)
         {
         }
 

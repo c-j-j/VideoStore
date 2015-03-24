@@ -2,7 +2,7 @@ namespace videostore
 {
     public class NewReleaseMovie : Movie
     {
-        public NewReleaseMovie(string title, int priceCode) : base(title, priceCode)
+        public NewReleaseMovie(string title) : base(title)
         {
         }
 
@@ -18,12 +18,7 @@ namespace videostore
 
         bool QualifiesForFrequentRenterBonus(int daysRented)
         {
-            return IsMovieNewRelease() && daysRented > 1;
-        }
-
-        bool IsMovieNewRelease()
-        {
-            return _priceCode == Movie.NEW_RELEASE;
+            return daysRented > 1;
         }
     }
 }
