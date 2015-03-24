@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace videostore
 {
-    class Customer
+    class Statement
     {
-        private String name;
+        private String customerName;
         private double totalAmount;
         private int frequentRenterPoints;
         private IList<Rental> rentals = new List<Rental>();
 
-        public Customer(String name)
+        public Statement(String customerName)
         {
-            this.name = name;
+            this.customerName = customerName;
         }
 
         public void AddRental(Rental rental)
@@ -20,9 +20,9 @@ namespace videostore
             rentals.Add(rental);
         }
 
-        public String GetName()
+        public String GetCustomerName()
         {
-            return name;
+            return customerName;
         }
 
         public String GenerateStatement()
@@ -50,7 +50,6 @@ namespace videostore
         static double DetermineRentalAmount(Rental rental)
         {
             double thisAmount = 0;
-            // determines the amount for each line
             switch (rental.GetMovie().GetPriceCode())
             {
                 case Movie.REGULAR:
@@ -72,7 +71,7 @@ namespace videostore
 
         string StatementHeader()
         {
-            return string.Format("Rental Record for {0}\n", name);
+            return string.Format("Rental Record for {0}\n", customerName);
         }
 
         static string FormatFrequentRenterPoints(int frequentRenterPoints)

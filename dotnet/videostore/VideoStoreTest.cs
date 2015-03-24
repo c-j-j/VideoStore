@@ -5,7 +5,7 @@
     [TestFixture]
     public class VideoStoreTest
     {
-        Customer customer;
+        Statement customer;
         Movie newReleaseMovieA;
         Movie newReleaseMovieB;
         Movie childrensMovie;
@@ -16,7 +16,7 @@
         [SetUp]
         public void Setup()
         {
-            customer = new Customer("SomeCustomerName");
+            customer = new Statement("SomeCustomerName");
             newReleaseMovieA = new Movie("SomeNewReleaseA", Movie.NEW_RELEASE);
             newReleaseMovieB = new Movie("SomeNewReleaseB", Movie.NEW_RELEASE);
             childrensMovie = new Movie("The Tigger Movie", Movie.CHILDRENS);
@@ -72,7 +72,7 @@
             customer.AddRental(new Rental(regularMovieC, 3));
             customer.GenerateStatement();
 
-            Assert.AreEqual("Rental Record for " + customer.GetName() + "\n\t" +
+            Assert.AreEqual("Rental Record for " + customer.GetCustomerName() + "\n\t" +
                 regularMovieA.GetTitle() + "\t2.0\n\t" +
                 regularMovieB.GetTitle() + "\t2.0\n\t" +
                 regularMovieC.GetTitle() + "\t3.5\n" +
