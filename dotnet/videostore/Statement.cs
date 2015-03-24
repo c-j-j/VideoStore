@@ -45,7 +45,7 @@ namespace videostore
             foreach (var rental in rentals)
             {
                 var rentalAmount = rental.DetermineRentalAmount();
-                frequentRenterPoints += DetermineFrequentRenterPoints(rental);
+                frequentRenterPoints += rental.DetermineFrequentRenterPoints();
                 bodyText += FormatRentalLine(rental, rentalAmount);
                 totalAmount += rentalAmount;
             }
@@ -53,22 +53,11 @@ namespace videostore
             return bodyText;
         }
 
-        static bool QualifiesForFrequentRenterBonus(Rental rental)
-        {
-            return rental.GetMovie().GetPriceCode() == Movie.NEW_RELEASE && rental.GetDaysRented() > 1;
-        }
-
-        int DetermineFrequentRenterPoints(Rental rental)
-        {
-            return QualifiesForFrequentRenterBonus(rental) ? 2 : 1;
-        }
-
         void ResetTotals()
         {
             totalAmount = 0;
             frequentRenterPoints = 0;
         }
-
 
         static string FormatFrequentRenterPoints(int frequentRenterPoints)
         {

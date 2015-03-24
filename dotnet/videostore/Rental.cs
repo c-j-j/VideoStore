@@ -38,6 +38,22 @@
             return thisAmount;
         }
 
+        public int DetermineFrequentRenterPoints()
+        {
+            return QualifiesForFrequentRenterBonus() ? 2 : 1;
+        }
+
+        bool QualifiesForFrequentRenterBonus()
+        {
+            return IsMovieNewRelease() && daysRented > 1;
+        }
+
+        bool IsMovieNewRelease()
+        {
+            var variable = movie.GetPriceCode() == Movie.NEW_RELEASE;
+            return variable;
+        }
+
         public Movie GetMovie()
         {
             return movie;
