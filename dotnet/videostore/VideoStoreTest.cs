@@ -72,10 +72,10 @@
             customer.AddRental(new Rental(regularMovieC, 3));
             customer.GenerateStatement();
 
-            Assert.AreEqual("Rental Record for SomeCustomerName\n\t" +
-                    "SomeRegularMovieA\t2.0\n\t" +
-                    "SomeRegularMovieB\t2.0\n\t" +
-                    "SomeRegularMovieC\t3.5\n" +
+            Assert.AreEqual("Rental Record for " + customer.GetName() + "\n\t" +
+                    regularMovieA.GetTitle() + "\t2.0\n\t" +
+                    regularMovieB.GetTitle() + "\t2.0\n\t" +
+                    regularMovieC.GetTitle() + "\t3.5\n" +
                     "You owed 7.5\n" +
                     "You earned 3 frequent renter points\n", customer.GenerateStatement());
         }
