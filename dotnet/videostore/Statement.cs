@@ -27,24 +27,46 @@ namespace videostore
 
         public String GenerateStatement()
         {
-            totalAmount = 0;
-            frequentRenterPoints = 0;
+            ResetTotals();
             var statementText = "";
             statementText += StatementHeader();
+            statementText += StatementBody();
+            return statementText;
+        }
+
+        string StatementHeader()
+        {
+            return string.Format("Rental Record for {0}\n", customerName);
+        }
+
+        string StatementBody()
+        {
+            var bodyText = "";
             foreach (var rental in rentals)
             {
                 var rentalAmount = DetermineRentalAmount(rental);
-                frequentRenterPoints++;
-                if (rental.GetMovie().GetPriceCode() == Movie.NEW_RELEASE
-                    && rental.GetDaysRented() > 1)
-                    frequentRenterPoints++;
-
-                statementText += FormatRentalLine(rental, rentalAmount);
+                frequentRenterPoints += DetermineFrequentRenterPoints(rental);
+                bodyText += FormatRentalLine(rental, rentalAmount);
                 totalAmount += rentalAmount;
             }
+            bodyText += StatementFooter(totalAmount, frequentRenterPoints);
+            return bodyText;
+        }
 
-            statementText += StatementFooter(totalAmount, frequentRenterPoints);
-            return statementText;
+        static bool QualifiesForFrequentRenterBonus(Rental rental)
+        {
+            return rental.GetMovie().GetPriceCode() == Movie.NEW_RELEASE && rental.GetDaysRented() > 1;
+        }
+
+        int DetermineFrequentRenterPoints(Rental rental)
+        {
+            return QualifiesForFrequentRenterBonus(rental) ? 2 : 1;
+        }
+
+        void ResetTotals()
+        {
+            totalAmount = 0;
+            frequentRenterPoints = 0;
         }
 
         static double DetermineRentalAmount(Rental rental)
@@ -67,11 +89,6 @@ namespace videostore
                     break;
             }
             return thisAmount;
-        }
-
-        string StatementHeader()
-        {
-            return string.Format("Rental Record for {0}\n", customerName);
         }
 
         static string FormatFrequentRenterPoints(int frequentRenterPoints)
