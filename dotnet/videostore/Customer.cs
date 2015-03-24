@@ -29,23 +29,22 @@ namespace videostore
         {
             totalAmount = 0;
             frequentRenterPoints = 0;
-            String result = "Rental Record for " + GetName() + "\n";
+            var statementText = "";
+            statementText += StatementHeader();
             foreach (var rental in rentals)
             {
                 var rentalAmount = DetermineRentalAmount(rental);
                 frequentRenterPoints++;
                 if (rental.GetMovie().GetPriceCode() == Movie.NEW_RELEASE
-                        && rental.GetDaysRented() > 1)
+                    && rental.GetDaysRented() > 1)
                     frequentRenterPoints++;
 
-                result += "\t" + rental.GetMovie().GetTitle() + "\t" + string.Format("{0:F1}", rentalAmount) + "\n";
+                statementText += FormatRentalLine(rental, rentalAmount);
                 totalAmount += rentalAmount;
             }
 
-            result += "You owed " + string.Format("{0:F1}", totalAmount) + "\n";
-            result += "You earned " + frequentRenterPoints + " frequent renter points\n";
-
-            return result;
+            statementText += StatementFooter(totalAmount, frequentRenterPoints);
+            return statementText;
         }
 
         static double DetermineRentalAmount(Rental rental)
@@ -71,6 +70,31 @@ namespace videostore
             return thisAmount;
         }
 
+        string StatementHeader()
+        {
+            return string.Format("Rental Record for {0}\n", name);
+        }
+
+        static string FormatFrequentRenterPoints(int frequentRenterPoints)
+        {
+            return string.Format("You earned {0} frequent renter points\n", frequentRenterPoints);
+        }
+
+        string StatementFooter(double totalAmount, int frequentRenterPoints)
+        {
+            return FormatTotalAmount(totalAmount) + FormatFrequentRenterPoints(frequentRenterPoints);
+        }
+
+        static string FormatTotalAmount(double totalAmount)
+        {
+            return string.Format("You owed {0:F1}\n", totalAmount);
+        }
+
+        static string FormatRentalLine(Rental rental, double rentalAmount)
+        {
+            return string.Format("\t{0}\t{1:F1}\n", rental.GetMovie().GetTitle(), rentalAmount);
+        }
+
         public double GetTotalAmount()
         {
             return totalAmount;
@@ -80,6 +104,5 @@ namespace videostore
         {
             return frequentRenterPoints;
         }
-
     }
 }
