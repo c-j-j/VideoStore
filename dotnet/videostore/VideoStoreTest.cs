@@ -19,7 +19,7 @@
             customer = new Statement("SomeCustomerName");
             newReleaseMovieA = new NewReleaseMovie("SomeNewReleaseA");
             newReleaseMovieB = new NewReleaseMovie("SomeNewReleaseB");
-            childrensMovie = new ChildrensMovie("The Tigger Movie");
+            childrensMovie = new ChildrensMovie("SomeChildrensMovie");
             regularMovieA = new RegularMovie("SomeRegularMovieA");
             regularMovieB = new RegularMovie("SomeRegularMovieB");
             regularMovieC = new RegularMovie("SomeRegularMovieC");

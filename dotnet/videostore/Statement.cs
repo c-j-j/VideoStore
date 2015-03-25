@@ -50,8 +50,8 @@ namespace videostore
             var bodyText = "";
             foreach (var rental in rentals)
             {
-                var rentalAmount = rental.DetermineRentalAmount();
-                frequentRenterPoints += rental.DetermineFrequentRenterPoints();
+                var rentalAmount = determineRentalAmount(rental);
+                frequentRenterPoints += determineFrequentRenterPoints(rental);
                 bodyText += FormatRentalLine(rental, rentalAmount);
                 totalAmount += rentalAmount;
             }
@@ -60,14 +60,22 @@ namespace videostore
             return bodyText;
         }
 
-        static string FormatFrequentRenterPoints(int frequentRenterPoints)
-        {
-            return string.Format("You earned {0} frequent renter points\n", frequentRenterPoints);
+        double determineRentalAmount(Rental rental){
+            return rental.DetermineRentalAmount();
+        }
+
+        int determineFrequentRenterPoints(Rental rental){
+            return rental.DetermineFrequentRenterPoints();
         }
 
         string StatementFooter(double totalAmount, int frequentRenterPoints)
         {
             return FormatTotalAmount(totalAmount) + FormatFrequentRenterPoints(frequentRenterPoints);
+        }
+
+        static string FormatFrequentRenterPoints(int frequentRenterPoints)
+        {
+            return string.Format("You earned {0} frequent renter points\n", frequentRenterPoints);
         }
 
         static string FormatTotalAmount(double totalAmount)
